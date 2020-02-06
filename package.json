@@ -2,7 +2,7 @@
   "name": "selenium-test",
   "version": "1.0.0",
   "description": "",
-  "main": "google.test.js",
+  "main": "tests/google.test.js",
   "scripts": {
     "test": "jest"
   },
