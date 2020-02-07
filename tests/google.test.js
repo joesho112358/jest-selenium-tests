@@ -3,7 +3,7 @@ jest.setTimeout(60000)
 const GoogleHome = require('./page_objects/google_home.po.js');
 const GoogleResults = require('./page_objects/google_results.po.js');
 
-describe("Google it", () => {
+describe("Googleing javascript", () => {
   let driver;
 
   beforeAll(async () => {
@@ -16,7 +16,7 @@ describe("Google it", () => {
     await driver.quit();
   });
   
-  test('Search Google for javascript', async () => {
+  test('Search for javascript', async () => {
     home_page = new GoogleHome(driver);
     results_page = new GoogleResults(driver);
     search_item = 'javascript';
@@ -28,6 +28,20 @@ describe("Google it", () => {
 
     expect(title).toBe(search_item + ' - Google Search');
     expect(text).toContain(search_item);
+  });
+  
+  test('First link is to js homepage', async () => {
+    home_page = new GoogleHome(driver);
+    results_page = new GoogleResults(driver);
+    search_item = 'javascript';
+
+    await driver.get(home_page.getUrl());
+    await home_page.search(search_item);
+    text = await results_page.first_link_text();
+    href = await results_page.first_link_href();
+
+    expect(text).toContain('JavaScript');
+    expect(href).toBe('https://www.javascript.com/');
   });
 
 });
